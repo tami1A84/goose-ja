@@ -1,8 +1,8 @@
 [
   {
     "id": "developer",
-    "name": "Developer",
-    "description": "General development tools useful for software engineering.",
+    "name": "開発者ツール",
+    "description": "ソフトウェアエンジニアリングに役立つ汎用開発ツール。",
     "enabled": true,
     "type": "builtin",
     "env_keys": [],
@@ -10,8 +10,8 @@
   },
   {
     "id": "computercontroller",
-    "name": "Computer Controller",
-    "description": "General computer control tools that don't require you to be a developer or engineer.",
+    "name": "コンピュータコントローラー",
+    "description": "開発者やエンジニアでなくても使える汎用コンピュータ制御ツール。",
     "enabled": false,
     "type": "builtin",
     "env_keys": [],
@@ -19,8 +19,8 @@
   },
   {
     "id": "autovisualiser",
-    "name": "Auto Visualiser",
-    "description": "Automatically see your data with this UI generation extension.",
+    "name": "自動ビジュアライザー",
+    "description": "このUI生成拡張機能でデータを自動的に可視化します。",
     "enabled": false,
     "type": "builtin",
     "env_keys": [],
@@ -28,8 +28,8 @@
   },
   {
     "id": "memory",
-    "name": "Memory",
-    "description": "Teach goose your preferences as you go.",
+    "name": "メモリ",
+    "description": "使いながらgooseにあなたの好みを学習させます。",
     "enabled": false,
     "type": "builtin",
     "env_keys": [],
@@ -37,8 +37,8 @@
   },
   {
     "id": "tutorial",
-    "name": "Tutorial",
-    "description": "Access interactive tutorials and guides",
+    "name": "チュートリアル",
+    "description": "インタラクティブなチュートリアルとガイドにアクセスします",
     "enabled": false,
     "type": "builtin",
     "env_keys": []

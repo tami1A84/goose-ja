@@ -115,7 +115,7 @@ export default function RecipesView() {
       const recipeManifestResponses = await listSavedRecipes();
       setSavedRecipes(recipeManifestResponses);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to load recipes');
+      setError(err instanceof Error ? err.message : 'レシピの読み込みに失敗しました');
       console.error('Failed to load saved recipes:', err);
     } finally {
       setLoading(false);
@@ -139,7 +139,7 @@ export default function RecipesView() {
       });
     } catch (error) {
       console.error('Failed to load recipe:', error);
-      const errorMsg = error instanceof Error ? error.message : 'Failed to load recipe';
+      const errorMsg = error instanceof Error ? error.message : 'レシピの読み込みに失敗しました';
       trackRecipeStarted(false, getErrorType(error), false);
       setError(errorMsg);
     }
@@ -165,11 +165,11 @@ export default function RecipesView() {
   const handleDeleteRecipe = async (recipeManifest: RecipeManifest) => {
     const result = await window.electron.showMessageBox({
       type: 'warning',
-      buttons: ['Cancel', 'Delete'],
+      buttons: ['キャンセル', '削除'],
       defaultId: 0,
-      title: 'Delete Recipe',
-      message: `Are you sure you want to delete "${recipeManifest.recipe.title}"?`,
-      detail: 'Recipe file will be deleted.',
+      title: 'レシピを削除',
+      message: `「${recipeManifest.recipe.title}」を削除してもよろしいですか？`,
+      detail: 'レシピファイルが削除されます。',
     });
 
     if (result.response !== 1) {
@@ -182,11 +182,11 @@ export default function RecipesView() {
       await loadSavedRecipes();
       toastSuccess({
         title: recipeManifest.recipe.title,
-        msg: 'Recipe deleted successfully',
+        msg: 'レシピを削除しました',
       });
     } catch (err) {
       console.error('Failed to delete recipe:', err);
-      const errorMsg = err instanceof Error ? err.message : 'Failed to delete recipe';
+      const errorMsg = err instanceof Error ? err.message : 'レシピの削除に失敗しました';
       trackRecipeDeleted(false, getErrorType(err));
       setError(errorMsg);
     }
@@ -211,15 +211,15 @@ export default function RecipesView() {
       await navigator.clipboard.writeText(deeplink);
       trackRecipeDeeplinkCopied(true);
       toastSuccess({
-        title: 'Deeplink copied',
-        msg: 'Recipe deeplink has been copied to clipboard',
+        title: 'ディープリンクをコピーしました',
+        msg: 'レシピのディープリンクがクリップボードにコピーされました',
       });
     } catch (error) {
       console.error('Failed to copy deeplink:', error);
       trackRecipeDeeplinkCopied(false, getErrorType(error));
       toastSuccess({
-        title: 'Copy failed',
-        msg: 'Failed to copy deeplink to clipboard',
+        title: 'コピー失敗',
+        msg: 'ディープリンクのクリップボードへのコピーに失敗しました',
       });
     }
   };
@@ -245,8 +245,8 @@ export default function RecipesView() {
 
       trackRecipeScheduled(true, action);
       toastSuccess({
-        title: 'Schedule saved',
-        msg: `Recipe will run ${getReadableCron(scheduleCron)}`,
+        title: 'スケジュールを保存しました',
+        msg: `レシピは${getReadableCron(scheduleCron)}に実行されます`,
       });
 
       setShowScheduleDialog(false);
@@ -254,7 +254,7 @@ export default function RecipesView() {
       await loadSavedRecipes();
     } catch (error) {
       console.error('Failed to save schedule:', error);
-      const errorMsg = error instanceof Error ? error.message : 'Failed to save schedule';
+      const errorMsg = error instanceof Error ? error.message : 'スケジュールの保存に失敗しました';
       trackRecipeScheduled(false, action, getErrorType(error));
       setError(errorMsg);
     }
@@ -273,8 +273,8 @@ export default function RecipesView() {
 
       trackRecipeScheduled(true, 'remove');
       toastSuccess({
-        title: 'Schedule removed',
-        msg: 'Recipe will no longer run automatically',
+        title: 'スケジュールを削除しました',
+        msg: 'レシピは自動的に実行されなくなります',
       });
 
       setShowScheduleDialog(false);
@@ -282,7 +282,7 @@ export default function RecipesView() {
       await loadSavedRecipes();
     } catch (error) {
       console.error('Failed to remove schedule:', error);
-      const errorMsg = error instanceof Error ? error.message : 'Failed to remove schedule';
+      const errorMsg = error instanceof Error ? error.message : 'スケジュールの削除に失敗しました';
       trackRecipeScheduled(false, 'remove', getErrorType(error));
       setError(errorMsg);
     }
@@ -313,8 +313,8 @@ export default function RecipesView() {
 
       trackRecipeSlashCommandSet(true, action);
       toastSuccess({
-        title: 'Slash command saved',
-        msg: slashCommand ? `Use /${slashCommand} to run this recipe` : 'Slash command removed',
+        title: 'スラッシュコマンドを保存しました',
+        msg: slashCommand ? `/${slashCommand} でこのレシピを実行できます` : 'スラッシュコマンドを削除しました',
       });
 
       setShowSlashCommandDialog(false);
@@ -322,7 +322,7 @@ export default function RecipesView() {
       await loadSavedRecipes();
     } catch (error) {
       console.error('Failed to save slash command:', error);
-      const errorMsg = error instanceof Error ? error.message : 'Failed to save slash command';
+      const errorMsg = error instanceof Error ? error.message : 'スラッシュコマンドの保存に失敗しました';
       trackRecipeSlashCommandSet(false, action, getErrorType(error));
       setError(errorMsg);
     }
@@ -341,8 +341,8 @@ export default function RecipesView() {
 
       trackRecipeSlashCommandSet(true, 'remove');
       toastSuccess({
-        title: 'Slash command removed',
-        msg: 'Recipe slash command has been removed',
+        title: 'スラッシュコマンドを削除しました',
+        msg: 'レシピのスラッシュコマンドが削除されました',
       });
 
       setShowSlashCommandDialog(false);
@@ -350,7 +350,7 @@ export default function RecipesView() {
       await loadSavedRecipes();
     } catch (error) {
       console.error('Failed to remove slash command:', error);
-      const errorMsg = error instanceof Error ? error.message : 'Failed to remove slash command';
+      const errorMsg = error instanceof Error ? error.message : 'スラッシュコマンドの削除に失敗しました';
       trackRecipeSlashCommandSet(false, 'remove', getErrorType(error));
       setError(errorMsg);
     }
@@ -422,7 +422,7 @@ export default function RecipesView() {
             }}
             size="sm"
             className="h-8 w-8 p-0"
-            title="Use recipe"
+            title="レシピを使用"
           >
             <Play className="w-4 h-4" />
           </Button>
@@ -434,7 +434,7 @@ export default function RecipesView() {
             variant="outline"
             size="sm"
             className="h-8 w-8 p-0"
-            title="Open in new window"
+            title="新しいウィンドウで開く"
           >
             <ExternalLink className="w-4 h-4" />
           </Button>
@@ -446,7 +446,7 @@ export default function RecipesView() {
             variant="outline"
             size="sm"
             className="h-8 w-8 p-0"
-            title="Edit recipe"
+            title="レシピを編集"
           >
             <Edit className="w-4 h-4" />
           </Button>
@@ -458,7 +458,7 @@ export default function RecipesView() {
             variant="outline"
             size="sm"
             className="h-8 w-8 p-0"
-            title="Copy deeplink"
+            title="ディープリンクをコピー"
           >
             <Link className="w-4 h-4" />
           </Button>
@@ -470,7 +470,7 @@ export default function RecipesView() {
             variant={schedule_cron ? 'default' : 'outline'}
             size="sm"
             className="h-8 w-8 p-0"
-            title={schedule_cron ? 'Edit schedule' : 'Add schedule'}
+            title={schedule_cron ? 'スケジュールを編集' : 'スケジュールを追加'}
           >
             <Clock className="w-4 h-4" />
           </Button>
@@ -482,7 +482,7 @@ export default function RecipesView() {
             variant="ghost"
             size="sm"
             className="h-8 w-8 p-0 text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20"
-            title="Delete recipe"
+            title="レシピを削除"
           >
             <Trash2 className="w-4 h-4" />
           </Button>
@@ -530,10 +530,10 @@ export default function RecipesView() {
       return (
         <div className="flex flex-col items-center justify-center h-full text-text-muted">
           <AlertCircle className="h-12 w-12 text-red-500 mb-4" />
-          <p className="text-lg mb-2">Error Loading Recipes</p>
+          <p className="text-lg mb-2">レシピの読み込みエラー</p>
           <p className="text-sm text-center mb-4">{error}</p>
           <Button onClick={loadSavedRecipes} variant="default">
-            Try Again
+            再試行
           </Button>
         </div>
       );
@@ -542,8 +542,8 @@ export default function RecipesView() {
     if (savedRecipes.length === 0) {
       return (
         <div className="flex flex-col justify-center pt-2 h-full">
-          <p className="text-lg">No saved recipes</p>
-          <p className="text-sm text-text-muted">Recipe saved from chats will show up here.</p>
+          <p className="text-lg">保存されたレシピがありません</p>
+          <p className="text-sm text-text-muted">チャットから保存されたレシピがここに表示されます。</p>
         </div>
       );
     }
@@ -552,8 +552,8 @@ export default function RecipesView() {
       return (
         <div className="flex flex-col items-center justify-center h-full text-text-muted mt-4">
           <FileText className="h-12 w-12 mb-4" />
-          <p className="text-lg mb-2">No matching recipes found</p>
-          <p className="text-sm">Try adjusting your search terms</p>
+          <p className="text-lg mb-2">一致するレシピが見つかりません</p>
+          <p className="text-sm">検索条件を調整してみてください</p>
         </div>
       );
     }
@@ -577,7 +577,7 @@ export default function RecipesView() {
           <div className="bg-background-default px-8 pb-8 pt-16">
             <div className="flex flex-col page-transition">
               <div className="flex justify-between items-center mb-1">
-                <h1 className="text-4xl font-light">Recipes</h1>
+                <h1 className="text-4xl font-light">レシピ</h1>
                 <div className="flex gap-2">
                   <Button
                     onClick={() => setShowCreateDialog(true)}
@@ -586,21 +586,21 @@ export default function RecipesView() {
                     className="flex items-center gap-2"
                   >
                     <FileText className="w-4 h-4" />
-                    Create Recipe
+                    レシピを作成
                   </Button>
                   <ImportRecipeButton onClick={() => setShowImportDialog(true)} />
                 </div>
               </div>
               <p className="text-sm text-text-muted mb-1">
-                View and manage your saved recipes to quickly start new sessions with predefined
-                configurations. ⌘F/Ctrl+F to search.
+                保存したレシピを表示・管理して、事前定義された設定で新しいセッションをすばやく開始できます。
+                ⌘F/Ctrl+F で検索。
               </p>
             </div>
           </div>
 
           <div className="flex-1 min-h-0 relative px-8">
             <ScrollArea className="h-full">
-              <SearchView onSearch={(term) => setSearchTerm(term)} placeholder="Search recipes...">
+              <SearchView onSearch={(term) => setSearchTerm(term)} placeholder="レシピを検索...">
                 <div
                   className={`h-full relative transition-all duration-300 ${
                     showContent ? 'opacity-100 animate-in fade-in ' : 'opacity-0'
@@ -645,7 +645,7 @@ export default function RecipesView() {
           <DialogContent className="max-w-md">
             <DialogHeader>
               <DialogTitle>
-                {scheduleRecipeManifest.schedule_cron ? 'Edit' : 'Add'} Schedule
+                スケジュールを{scheduleRecipeManifest.schedule_cron ? '編集' : '追加'}
               </DialogTitle>
             </DialogHeader>
             <div className="space-y-4">
@@ -668,14 +668,14 @@ export default function RecipesView() {
               <div className="flex gap-2 justify-end">
                 {scheduleRecipeManifest.schedule_cron && (
                   <Button variant="outline" onClick={handleRemoveSchedule}>
-                    Remove Schedule
+                    スケジュールを削除
                   </Button>
                 )}
                 <Button variant="outline" onClick={() => setShowScheduleDialog(false)}>
-                  Cancel
+                  キャンセル
                 </Button>
                 <Button onClick={handleSaveSchedule} disabled={!scheduleValid}>
-                  Save
+                  保存
                 </Button>
               </div>
             </div>
@@ -687,12 +687,12 @@ export default function RecipesView() {
         <Dialog open={showSlashCommandDialog} onOpenChange={setShowSlashCommandDialog}>
           <DialogContent className="max-w-md">
             <DialogHeader>
-              <DialogTitle>Slash Command</DialogTitle>
+              <DialogTitle>スラッシュコマンド</DialogTitle>
             </DialogHeader>
             <div className="space-y-4">
               <div>
                 <p className="text-sm text-muted-foreground mb-3">
-                  Set a slash command to quickly run this recipe from any chat
+                  スラッシュコマンドを設定して、任意のチャットからこのレシピをすばやく実行できます
                 </p>
                 <div className="flex gap-2 items-center">
                   <span className="text-muted-foreground">/</span>
@@ -700,13 +700,13 @@ export default function RecipesView() {
                     type="text"
                     value={slashCommand}
                     onChange={(e) => setSlashCommand(e.target.value)}
-                    placeholder="command-name"
+                    placeholder="コマンド名"
                     className="flex-1 px-3 py-2 border rounded text-sm"
                   />
                 </div>
                 {slashCommand && (
                   <p className="text-xs text-muted-foreground mt-2">
-                    Use /{slashCommand} in any chat to run this recipe
+                    任意のチャットで /{slashCommand} を使用してこのレシピを実行できます
                   </p>
                 )}
               </div>
@@ -714,13 +714,13 @@ export default function RecipesView() {
               <div className="flex gap-2 justify-end">
                 {slashCommandRecipeManifest.slash_command && (
                   <Button variant="outline" onClick={handleRemoveSlashCommand}>
-                    Remove
+                    削除
                   </Button>
                 )}
                 <Button variant="outline" onClick={() => setShowSlashCommandDialog(false)}>
-                  Cancel
+                  キャンセル
                 </Button>
-                <Button onClick={handleSaveSlashCommand}>Save</Button>
+                <Button onClick={handleSaveSlashCommand}>保存</Button>
               </div>
             </div>
           </DialogContent>

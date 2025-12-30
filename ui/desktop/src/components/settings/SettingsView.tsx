@@ -87,7 +87,7 @@ export default function SettingsView({
           <div className="bg-background-default px-8 pb-8 pt-16">
             <div className="flex flex-col page-transition">
               <div className="flex justify-between items-center mb-1">
-                <h1 className="text-4xl font-light">Settings</h1>
+                <h1 className="text-4xl font-light">設定</h1>
               </div>
             </div>
           </div>
@@ -106,11 +106,11 @@ export default function SettingsView({
                     data-testid="settings-models-tab"
                   >
                     <Bot className="h-4 w-4" />
-                    Models
+                    モデル
                   </TabsTrigger>
                   <TabsTrigger value="chat" className="flex gap-2" data-testid="settings-chat-tab">
                     <MessageSquare className="h-4 w-4" />
-                    Chat
+                    チャット
                   </TabsTrigger>
                   <TabsTrigger
                     value="sharing"
@@ -118,11 +118,11 @@ export default function SettingsView({
                     data-testid="settings-sharing-tab"
                   >
                     <Share2 className="h-4 w-4" />
-                    Session
+                    セッション
                   </TabsTrigger>
                   <TabsTrigger value="app" className="flex gap-2" data-testid="settings-app-tab">
                     <Monitor className="h-4 w-4" />
-                    App
+                    アプリ
                   </TabsTrigger>
                 </TabsList>
               </div>

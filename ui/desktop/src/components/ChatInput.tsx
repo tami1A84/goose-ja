@@ -261,14 +261,14 @@ export default function ChatInput({
       const errorType = error.name || 'DictationError';
       trackVoiceDictation('error', undefined, errorType);
       toastError({
-        title: 'Dictation Error',
+        title: '音声入力エラー',
         msg: error.message,
       });
     },
     onSizeWarning: (sizeMB) => {
       toastError({
-        title: 'Recording Size Warning',
-        msg: `Recording is ${sizeMB.toFixed(1)}MB. Maximum size is 25MB.`,
+        title: '録音サイズ警告',
+        msg: `録音サイズは${sizeMB.toFixed(1)}MBです。最大サイズは25MBです。`,
       });
     },
   });
@@ -472,7 +472,7 @@ export default function ChatInput({
     if ((totalTokens && totalTokens > 0) || (isTokenLimitLoaded && tokenLimit)) {
       addAlert({
         type: AlertType.Info,
-        message: 'Context window',
+        message: 'コンテキストウィンドウ',
         progress: {
           current: totalTokens || 0,
           total: tokenLimit,
@@ -496,9 +496,9 @@ export default function ChatInput({
     if (toolCount !== null && toolCount > TOOLS_MAX_SUGGESTED) {
       addAlert({
         type: AlertType.Warning,
-        message: `Too many tools can degrade performance.\nTool count: ${toolCount} (recommend: ${TOOLS_MAX_SUGGESTED})`,
+        message: `ツールが多すぎるとパフォーマンスが低下する可能性があります。\nツール数: ${toolCount} (推奨: ${TOOLS_MAX_SUGGESTED})`,
         action: {
-          text: 'View extensions',
+          text: '拡張機能を表示',
           onClick: () => setView('extensions'),
         },
         autoShow: false, // Don't auto-show tool count warnings
@@ -633,7 +633,7 @@ export default function ChatInput({
           id: `error-${Date.now()}`,
           dataUrl: '',
           isLoading: false,
-          error: `Cannot paste ${imageFiles.length} image(s). Maximum ${MAX_IMAGES_PER_MESSAGE} images per message allowed. Currently have ${pastedImages.length}.`,
+          error: `${imageFiles.length}枚の画像を貼り付けできません。1メッセージあたり最大${MAX_IMAGES_PER_MESSAGE}枚の画像が許可されています。現在${pastedImages.length}枚です。`,
         },
       ]);
 
@@ -660,7 +660,7 @@ export default function ChatInput({
           id: errorId,
           dataUrl: '',
           isLoading: false,
-          error: `Image too large (${Math.round(file.size / (1024 * 1024))}MB). Maximum ${MAX_IMAGE_SIZE_MB}MB allowed.`,
+          error: `画像が大きすぎます (${Math.round(file.size / (1024 * 1024))}MB)。最大${MAX_IMAGE_SIZE_MB}MBまで許可されています。`,
         });
 
         // Remove the error message after 5 seconds with cleanup tracking
@@ -1215,7 +1215,7 @@ export default function ChatInput({
             data-testid="chat-input"
             autoFocus
             id="dynamic-textarea"
-            placeholder={isRecording ? '' : '⌘↑/⌘↓ to navigate messages'}
+            placeholder={isRecording ? '' : '⌘↑/⌘↓ でメッセージ履歴を表示'}
             value={displayValue}
             onChange={handleChange}
             onCompositionStart={handleCompositionStart}
@@ -1269,22 +1269,22 @@ export default function ChatInput({
                   <TooltipContent>
                     {dictationSettings.provider === 'openai' ? (
                       <p>
-                        OpenAI API key is not configured. Set it up in <b>Settings</b> {'>'}{' '}
-                        <b>Models.</b>
+                        OpenAI APIキーが設定されていません。<b>設定</b> {'>'}{' '}
+                        <b>モデル</b>で設定してください。
                       </p>
                     ) : VOICE_DICTATION_ELEVENLABS_ENABLED &&
                       dictationSettings.provider === 'elevenlabs' ? (
                       <p>
-                        ElevenLabs API key is not configured. Set it up in <b>Settings</b> {'>'}{' '}
-                        <b>Chat</b> {'>'} <b>Voice Dictation.</b>
+                        ElevenLabs APIキーが設定されていません。<b>設定</b> {'>'}{' '}
+                        <b>チャット</b> {'>'} <b>音声入力</b>で設定してください。
                       </p>
                     ) : dictationSettings.provider === null ? (
                       <p>
-                        Dictation is not configured. Configure it in <b>Settings</b> {'>'}{' '}
-                        <b>Chat</b> {'>'} <b>Voice Dictation.</b>
+                        音声入力が設定されていません。<b>設定</b> {'>'}{' '}
+                        <b>チャット</b> {'>'} <b>音声入力</b>で設定してください。
                       </p>
                     ) : (
-                      <p>Dictation provider is not properly configured.</p>
+                      <p>音声入力プロバイダーが正しく設定されていません。</p>
                     )}
                   </TooltipContent>
                 </Tooltip>
@@ -1347,23 +1347,23 @@ export default function ChatInput({
                     }`}
                   >
                     <Send className="w-4 h-4" />
-                    <span className="text-sm">Send</span>
+                    <span className="text-sm">送信</span>
                   </Button>
                 </span>
               </TooltipTrigger>
               <TooltipContent>
                 <p>
                   {isExtensionsLoading
-                    ? 'Loading extensions...'
+                    ? '拡張機能を読み込み中...'
                     : isAnyImageLoading
-                      ? 'Waiting for images to save...'
+                      ? '画像を保存中...'
                       : isAnyDroppedFileLoading
-                        ? 'Processing dropped files...'
+                        ? 'ドロップされたファイルを処理中...'
                         : isRecording
-                          ? 'Recording...'
+                          ? '録音中...'
                           : isTranscribing
-                            ? 'Transcribing...'
-                            : 'Send'}
+                            ? '文字起こし中...'
+                            : '送信'}
                 </p>
               </TooltipContent>
             </Tooltip>
@@ -1375,7 +1375,7 @@ export default function ChatInput({
               {isTranscribing ? (
                 <span className="text-blue-500 flex items-center gap-1">
                   <span className="inline-block w-2 h-2 bg-blue-500 rounded-full animate-pulse" />
-                  Transcribing...
+                  文字起こし中...
                 </span>
               ) : (
                 <span
@@ -1383,7 +1383,7 @@ export default function ChatInput({
                 >
                   <span className="inline-block w-2 h-2 bg-red-500 rounded-full animate-pulse" />
                   {Math.floor(recordingDuration)}s • ~{estimatedSize.toFixed(1)}MB
-                  {estimatedSize > 20 && <span className="text-xs">(near 25MB limit)</span>}
+                  {estimatedSize > 20 && <span className="text-xs">(25MB制限に近づいています)</span>}
                 </span>
               )}
             </div>
@@ -1418,11 +1418,11 @@ export default function ChatInput({
                     <Button
                       type="button"
                       onClick={() => handleRetryImageSave(img.id)}
-                      title="Retry saving image"
+                      title="画像の保存を再試行"
                       variant="outline"
                       size="xs"
                     >
-                      Retry
+                      再試行
                     </Button>
                   )}
                 </div>
@@ -1433,7 +1433,7 @@ export default function ChatInput({
                   shape="round"
                   onClick={() => handleRemovePastedImage(img.id)}
                   className="absolute -top-1 -right-1 opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity z-10"
-                  aria-label="Remove image"
+                  aria-label="画像を削除"
                   variant="outline"
                   size="xs"
                 >
@@ -1479,7 +1479,7 @@ export default function ChatInput({
                     <p className="text-sm text-textStandard truncate" title={file.name}>
                       {file.name}
                     </p>
-                    <p className="text-xs text-textSubtle">{file.type || 'Unknown type'}</p>
+                    <p className="text-xs text-textSubtle">{file.type || '不明なタイプ'}</p>
                   </div>
                 </div>
               )}
@@ -1489,7 +1489,7 @@ export default function ChatInput({
                   shape="round"
                   onClick={() => handleRemoveDroppedFile(file.id)}
                   className="absolute -top-1 -right-1 opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity z-10"
-                  aria-label="Remove file"
+                  aria-label="ファイルを削除"
                   variant="outline"
                   size="xs"
                 >
@@ -1519,7 +1519,7 @@ export default function ChatInput({
               <Attach className="w-4 h-4" />
             </Button>
           </TooltipTrigger>
-          <TooltipContent>Attach file or directory</TooltipContent>
+          <TooltipContent>ファイルまたはディレクトリを添付</TooltipContent>
         </Tooltip>
         <div className="w-px h-4 bg-border-default mx-2" />
         {/* Model selector, mode selector, alerts, summarize button */}
@@ -1578,7 +1578,7 @@ export default function ChatInput({
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent>
-                    {recipe ? 'View/Edit Recipe' : 'Create Recipe from Session'}
+                    {recipe ? 'レシピを表示/編集' : 'セッションからレシピを作成'}
                   </TooltipContent>
                 </Tooltip>
               </div>
@@ -1600,7 +1600,7 @@ export default function ChatInput({
                   <Bug className="w-4 h-4" />
                 </Button>
               </TooltipTrigger>
-              <TooltipContent>Generate diagnostics bundle</TooltipContent>
+              <TooltipContent>診断バンドルを生成</TooltipContent>
             </Tooltip>
           )}
         </div>

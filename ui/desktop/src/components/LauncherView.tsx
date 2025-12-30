@@ -35,7 +35,7 @@ export default function LauncherView() {
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={handleKeyDown}
           className="w-full h-full bg-transparent text-text-default text-xl px-6 outline-none placeholder-text-muted"
-          placeholder="Ask goose anything..."
+          placeholder="gooseに何でも聞いてください..."
           autoFocus
         />
       </form>

@@ -67,7 +67,7 @@ export default function ProviderGuard({ didSelectProvider, children }: ProviderG
         trackOnboardingSetupFailed('tetrate', result.message);
         setTetrateSetupState({
           show: true,
-          title: 'Setup Failed',
+          title: 'セットアップ失敗',
           message: result.message,
           showRetry: true,
         });
@@ -77,8 +77,8 @@ export default function ProviderGuard({ didSelectProvider, children }: ProviderG
       trackOnboardingSetupFailed('tetrate', 'unexpected_error');
       setTetrateSetupState({
         show: true,
-        title: 'Setup Error',
-        message: 'An unexpected error occurred during setup.',
+        title: 'セットアップエラー',
+        message: 'セットアップ中に予期しないエラーが発生しました。',
         showRetry: true,
       });
     }
@@ -120,7 +120,7 @@ export default function ProviderGuard({ didSelectProvider, children }: ProviderG
         trackOnboardingSetupFailed('openrouter', result.message);
         setOpenRouterSetupState({
           show: true,
-          title: 'Setup Failed',
+          title: 'セットアップ失敗',
           message: result.message,
           showRetry: true,
         });
@@ -130,8 +130,8 @@ export default function ProviderGuard({ didSelectProvider, children }: ProviderG
       trackOnboardingSetupFailed('openrouter', 'unexpected_error');
       setOpenRouterSetupState({
         show: true,
-        title: 'Setup Error',
-        message: 'An unexpected error occurred during setup.',
+        title: 'セットアップエラー',
+        message: 'セットアップ中に予期しないエラーが発生しました。',
         showRetry: true,
       });
     }
@@ -188,8 +188,8 @@ export default function ProviderGuard({ didSelectProvider, children }: ProviderG
       } catch (error) {
         console.error('Error checking provider:', error);
         toastService.error({
-          title: 'Configuration Error',
-          msg: 'Failed to check provider configuration.',
+          title: '設定エラー',
+          msg: 'プロバイダー設定の確認に失敗しました。',
           traceback: error instanceof Error ? error.stack || '' : '',
         });
         setHasProvider(false);
@@ -233,11 +233,10 @@ export default function ProviderGuard({ didSelectProvider, children }: ProviderG
                   <div className="origin-bottom-left goose-icon-animation">
                     <Goose className="size-6 sm:size-8" />
                   </div>
-                  <h1 className="text-2xl sm:text-4xl font-light text-left">Welcome to Goose</h1>
+                  <h1 className="text-2xl sm:text-4xl font-light text-left">Gooseへようこそ</h1>
                 </div>
                 <p className="text-text-muted text-base sm:text-lg mt-4 sm:mt-6">
-                  Since it’s your first time here, let’s get you set up with an AI provider so goose
-                  can work its magic.
+                  初めてのご利用なので、gooseが魔法のように動作できるようにAIプロバイダーを設定しましょう。
                 </p>
               </div>
 
@@ -278,7 +277,7 @@ export default function ProviderGuard({ didSelectProvider, children }: ProviderG
                     </div>
                   </div>
                   <p className="text-text-muted text-sm sm:text-base">
-                    Secure access to multiple AI models with automatic setup. Free tier available.
+                    自動セットアップで複数のAIモデルに安全にアクセス。無料プランあり。
                   </p>
                 </div>
 
@@ -314,7 +313,7 @@ export default function ProviderGuard({ didSelectProvider, children }: ProviderG
                     </div>
                   </div>
                   <p className="text-text-muted text-sm sm:text-base">
-                    Access 200+ models with one API. Pay-per-use pricing.
+                    1つのAPIで200以上のモデルにアクセス。従量課金制。
                   </p>
                 </div>
               </div>
@@ -322,16 +321,16 @@ export default function ProviderGuard({ didSelectProvider, children }: ProviderG
               {/* Other providers section */}
               <div className="w-full p-4 sm:p-6 bg-transparent border border-background-hover rounded-xl">
                 <h3 className="font-medium text-text-standard text-sm sm:text-base mb-3">
-                  Other Providers
+                  その他のプロバイダー
                 </h3>
                 <p className="text-text-muted text-sm sm:text-base mb-4">
-                  Set up additional providers manually through settings.
+                  設定から追加のプロバイダーを手動でセットアップできます。
                 </p>
                 <button
                   onClick={() => navigate('/welcome', { replace: true })}
                   className="text-blue-600 hover:text-blue-500 text-sm font-medium transition-colors"
                 >
-                  Go to Provider Settings →
+                  プロバイダー設定へ →
                 </button>
               </div>
               <div className="mt-6">
@@ -371,7 +370,7 @@ export default function ProviderGuard({ didSelectProvider, children }: ProviderG
             setView={setView}
             onModelSelected={handleModelSelected}
             initialProvider={switchModelProvider}
-            titleOverride="Choose Model"
+            titleOverride="モデルを選択"
           />
         )}
       </div>

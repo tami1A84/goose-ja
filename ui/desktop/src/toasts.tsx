@@ -195,21 +195,21 @@ function ToastErrorContent({
       </div>
       <div className="flex-none flex items-center gap-2">
         {showRecovery && (
-          <Button onClick={() => startNewSession(recoverHints, setView)}>Ask goose</Button>
+          <Button onClick={() => startNewSession(recoverHints, setView)}>gooseに聞く</Button>
         )}
         {hasBoth && (
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button onClick={handleCopyError} shape="round" aria-label="Copy error">
+              <Button onClick={handleCopyError} shape="round" aria-label="エラーをコピー">
                 <Copy className="h-4 w-4" />
               </Button>
             </TooltipTrigger>
             <TooltipContent side="bottom" className="z-[10000]">
-              Copy error
+              エラーをコピー
             </TooltipContent>
           </Tooltip>
         )}
-        {traceback && !hasBoth && <Button onClick={handleCopyError}>Copy error</Button>}
+        {traceback && !hasBoth && <Button onClick={handleCopyError}>エラーをコピー</Button>}
       </div>
     </div>
   );

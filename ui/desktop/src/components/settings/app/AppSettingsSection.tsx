@@ -152,20 +152,20 @@ export default function AppSettingsSection({ scrollToSection }: AppSettingsSecti
     <div className="space-y-4 pr-4 pb-8 mt-1">
       <Card className="rounded-lg">
         <CardHeader className="pb-0">
-          <CardTitle className="">Appearance</CardTitle>
-          <CardDescription>Configure how goose appears on your system</CardDescription>
+          <CardTitle className="">外観</CardTitle>
+          <CardDescription>gooseのシステム上での表示方法を設定します</CardDescription>
         </CardHeader>
         <CardContent className="pt-4 space-y-4 px-4">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-text-default text-xs">Notifications</h3>
+              <h3 className="text-text-default text-xs">通知</h3>
               <p className="text-xs text-text-muted max-w-md mt-[2px]">
-                Notifications are managed by your OS{' - '}
+                通知はOSで管理されています{' - '}
                 <span
                   className="underline hover:cursor-pointer"
                   onClick={() => setShowNotificationModal(true)}
                 >
-                  Configuration guide
+                  設定ガイド
                 </span>
               </p>
             </div>
@@ -183,16 +183,16 @@ export default function AppSettingsSection({ scrollToSection }: AppSettingsSecti
                 }}
               >
                 <Settings />
-                Open Settings
+                設定を開く
               </Button>
             </div>
           </div>
 
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-text-default text-xs">Menu bar icon</h3>
+              <h3 className="text-text-default text-xs">メニューバーアイコン</h3>
               <p className="text-xs text-text-muted max-w-md mt-[2px]">
-                Show goose in the menu bar
+                メニューバーにgooseを表示
               </p>
             </div>
             <div className="flex items-center">
@@ -207,8 +207,8 @@ export default function AppSettingsSection({ scrollToSection }: AppSettingsSecti
           {isMacOS && (
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-text-default text-xs">Dock icon</h3>
-                <p className="text-xs text-text-muted max-w-md mt-[2px]">Show goose in the dock</p>
+                <h3 className="text-text-default text-xs">Dockアイコン</h3>
+                <p className="text-xs text-text-muted max-w-md mt-[2px]">Dockにgooseを表示</p>
               </div>
               <div className="flex items-center">
                 <Switch
@@ -224,9 +224,9 @@ export default function AppSettingsSection({ scrollToSection }: AppSettingsSecti
           {/* Prevent Sleep */}
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-text-default text-xs">Prevent Sleep</h3>
+              <h3 className="text-text-default text-xs">スリープ防止</h3>
               <p className="text-xs text-text-muted max-w-md mt-[2px]">
-                Keep your computer awake while goose is running a task (screen can still lock)
+                gooseがタスクを実行中はコンピュータをスリープさせない（画面ロックは可能）
               </p>
             </div>
             <div className="flex items-center">
@@ -242,9 +242,9 @@ export default function AppSettingsSection({ scrollToSection }: AppSettingsSecti
           {COST_TRACKING_ENABLED && (
             <div className="flex items-center justify-between mb-4">
               <div>
-                <h3 className="text-textStandard">Cost Tracking</h3>
+                <h3 className="text-textStandard">コスト追跡</h3>
                 <p className="text-xs text-textSubtle max-w-md mt-[2px]">
-                  Show model pricing and usage costs
+                  モデルの価格と使用コストを表示
                 </p>
               </div>
               <div className="flex items-center">
@@ -261,8 +261,8 @@ export default function AppSettingsSection({ scrollToSection }: AppSettingsSecti
 
       <Card className="rounded-lg">
         <CardHeader className="pb-0">
-          <CardTitle className="mb-1">Theme</CardTitle>
-          <CardDescription>Customize the look and feel of goose</CardDescription>
+          <CardTitle className="mb-1">テーマ</CardTitle>
+          <CardDescription>gooseの外観をカスタマイズ</CardDescription>
         </CardHeader>
         <CardContent className="pt-4 px-4">
           <ThemeSelector className="w-auto" hideTitle horizontal />
@@ -275,9 +275,9 @@ export default function AppSettingsSection({ scrollToSection }: AppSettingsSecti
 
       <Card className="rounded-lg">
         <CardHeader className="pb-0">
-          <CardTitle className="mb-1">Help & feedback</CardTitle>
+          <CardTitle className="mb-1">ヘルプとフィードバック</CardTitle>
           <CardDescription>
-            Help us improve goose by reporting issues or requesting new features
+            問題の報告や新機能のリクエストでgooseの改善にご協力ください
           </CardDescription>
         </CardHeader>
         <CardContent className="pt-4 px-4">
@@ -292,7 +292,7 @@ export default function AppSettingsSection({ scrollToSection }: AppSettingsSecti
               variant="secondary"
               size="sm"
             >
-              Report a Bug
+              バグを報告
             </Button>
             <Button
               onClick={() => {
@@ -304,7 +304,7 @@ export default function AppSettingsSection({ scrollToSection }: AppSettingsSecti
               variant="secondary"
               size="sm"
             >
-              Request a Feature
+              機能をリクエスト
             </Button>
           </div>
         </CardContent>
@@ -314,7 +314,7 @@ export default function AppSettingsSection({ scrollToSection }: AppSettingsSecti
       {!shouldShowUpdates && (
         <Card className="rounded-lg">
           <CardHeader className="pb-0">
-            <CardTitle className="mb-1">Version</CardTitle>
+            <CardTitle className="mb-1">バージョン</CardTitle>
           </CardHeader>
           <CardContent className="pt-4 px-4">
             <div className="flex items-center gap-3">
@@ -324,7 +324,7 @@ export default function AppSettingsSection({ scrollToSection }: AppSettingsSecti
                 className="h-8 w-auto"
               />
               <span className="text-2xl font-mono text-black dark:text-white">
-                {String(window.appConfig.get('GOOSE_VERSION') || 'Development')}
+                {String(window.appConfig.get('GOOSE_VERSION') || '開発版')}
               </span>
             </div>
           </CardContent>
@@ -336,9 +336,9 @@ export default function AppSettingsSection({ scrollToSection }: AppSettingsSecti
         <div ref={updateSectionRef}>
           <Card className="rounded-lg">
             <CardHeader className="pb-0">
-              <CardTitle className="mb-1">Updates</CardTitle>
+              <CardTitle className="mb-1">アップデート</CardTitle>
               <CardDescription>
-                Check for and install updates to keep goose running at its best
+                gooseを最高の状態で動作させるためにアップデートを確認してインストール
               </CardDescription>
             </CardHeader>
             <CardContent className="px-4">
@@ -357,7 +357,7 @@ export default function AppSettingsSection({ scrollToSection }: AppSettingsSecti
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
               <Settings className="text-iconStandard" size={24} />
-              How to Enable Notifications
+              通知を有効にする方法
             </DialogTitle>
           </DialogHeader>
 
@@ -365,22 +365,22 @@ export default function AppSettingsSection({ scrollToSection }: AppSettingsSecti
             {/* OS-specific instructions */}
             {isMacOS ? (
               <div className="space-y-4">
-                <p>To enable notifications on macOS:</p>
+                <p>macOSで通知を有効にするには:</p>
                 <ol className="list-decimal pl-5 space-y-2">
-                  <li>Open System Preferences</li>
-                  <li>Click on Notifications</li>
-                  <li>Find and select goose in the application list</li>
-                  <li>Enable notifications and adjust settings as desired</li>
+                  <li>システム環境設定を開く</li>
+                  <li>通知をクリック</li>
+                  <li>アプリケーションリストからgooseを見つけて選択</li>
+                  <li>通知を有効にして、必要に応じて設定を調整</li>
                 </ol>
               </div>
             ) : (
               <div className="space-y-4">
-                <p>To enable notifications on Windows:</p>
+                <p>Windowsで通知を有効にするには:</p>
                 <ol className="list-decimal pl-5 space-y-2">
-                  <li>Open Settings</li>
-                  <li>Go to System &gt; Notifications</li>
-                  <li>Find and select goose in the application list</li>
-                  <li>Toggle notifications on and adjust settings as desired</li>
+                  <li>設定を開く</li>
+                  <li>システム &gt; 通知に移動</li>
+                  <li>アプリケーションリストからgooseを見つけて選択</li>
+                  <li>通知をオンにして、必要に応じて設定を調整</li>
                 </ol>
               </div>
             )}
@@ -388,7 +388,7 @@ export default function AppSettingsSection({ scrollToSection }: AppSettingsSecti
 
           <DialogFooter>
             <Button variant="outline" onClick={() => setShowNotificationModal(false)}>
-              Close
+              閉じる
             </Button>
           </DialogFooter>
         </DialogContent>

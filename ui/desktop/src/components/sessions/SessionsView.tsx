@@ -26,7 +26,7 @@ const SessionsView: React.FC = () => {
       setSelectedSession(response.data);
     } catch (err) {
       console.error(`Failed to load session details for ${sessionId}:`, err);
-      setError('Failed to load session details. Please try again later.');
+      setError('セッション詳細の読み込みに失敗しました。後でもう一度お試しください。');
       // Keep the selected session null if there's an error
       setSelectedSession(null);
       setShowSessionHistory(false);
@@ -78,7 +78,7 @@ const SessionsView: React.FC = () => {
         selectedSession || {
           id: initialSessionId || '',
           conversation: [],
-          name: 'Loading...',
+          name: '読み込み中...',
           working_dir: '',
           message_count: 0,
           total_tokens: 0,
